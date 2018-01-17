@@ -24,6 +24,7 @@ qsub $ProgDir/sub_bwa.sh $Strain $Reference $ReadsF $ReadsR $OutDir
 done
 ```
 
+
 ```bash
 Reference=$(ls GCA_002114115.1_ASM211411v1/GCA_002114115.1_ASM211411v1_genomic.fna)
 for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_genetics/m27/conc); do
