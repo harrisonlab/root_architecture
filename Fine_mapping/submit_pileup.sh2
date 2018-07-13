@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#Pileup BAM files with samtools
+#$ -S /bin/bash
+#$ -cwd
+#$ -pe smp 8
+#$ -l virtual_free=8G
+#$ -l h=blacklace11.blacklace
+
+REF=$1
+BAMS=$(awk -vRS="\n" -vORS=" " '1' $2)
+DEST=$3
+OUTNAME=$4
+REGION=$5
+WORK_DIR=$TMPDIR
+
+echo "piling up: $BAMS"
+echo "ref genome: $REF" 
+echo "region: $REGION" 
+echo "output file: $OUTNAME"
+
+cd $WORK_DIR
+
+cat $BAMS|xargs -I file samtools index file 
+samtools mpileup -o $OUTNAME -u -r $REGION -f $REF $BAMS
+
+cp $OUTNAME $DEST/.
