@@ -1,6 +1,6 @@
-#Rootstocks alignment M9 MM106 M27
+# Rootstocks alignment M9 MM106 M27
 
-###Fastaqc and trim  were done by Greg.
+### Fastaqc and trim  were done by Greg.
 
 $ROOTSTOCK was set to the directory contain the rootstock project (~/projects/apple_rootstock/rootstock_genetics)
 Folders for each rootstock was created in the rootstock_genetics folder
@@ -10,7 +10,7 @@ eg:
 gunzip *
 cat 863_LIB6292_LDI5172_GTGAAA_L00*_R1.fastq.gz >m27_r1.fa
 ```
-###Fastaqc was run on each pair of reads in order to assess the quality
+### Fastaqc was run on each pair of reads in order to assess the quality
 
 ```shell
 nohup fastqc m116_r1.fq m116_r2.fq &
@@ -35,7 +35,7 @@ for d in [mg]*;
 $ROOTSTOCK/scripts//fastq-mcf.sh $ROOTSTOCK/rootstock_genetics/o3/conc/o3_r1.fq  $ROOTSTOCK/rootstock_genetics/o3/conc/
  ```
 
-###PhiX removal in M27, M9 and M116
+### PhiX removal in M27, M9 and M116
 PhiX removal in these rootstocks was done with bowtie
 M116 does not have PhiX - same size after running this
 
@@ -50,7 +50,7 @@ done
 ./bowtie_se.sh $ROOTSTOCK/rootstock_genetics/o3/conc/o3_r1.fq.trim /home/groups/harrisonlab/ref_genomes/phix/phix $ROOTSTOCK/rootstock_genetics/o3/conc/ phix_filtered
 ```
 
-###PhiX removal in M13, Gala and MM106 was done with a different program
+### PhiX removal in M13, Gala and MM106 was done with a different program
 Why do we used a different program?
 The program used for phix filtering is called bbduk (version 37.77) (https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/) which is part of the very useful bbtools package.
 The command line used to run bbduk was:
@@ -72,7 +72,7 @@ The files will be named e.g. /home/groups/harrisonlab/project_files/rootstock_ge
 The files are compressed so may need to gunzip them first before doing anything else with them.
 In each conc directory there are also a new stats directory which tells how much phix was found and removed
 
-#Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
+# Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
 
 ```bash
 Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
@@ -156,7 +156,7 @@ qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
 
-###m27 is not working
+### m27 is not working
 Could be something related to running fastqc
 
 Run a test with just a few reads and see if the problem is still happening
@@ -169,6 +169,21 @@ echo $Cultivar
 ReadsF=$(ls $CultivarPath/m27_25k_sample.f.fq)
 ReadsR=$(ls $CultivarPath/m27_25k_sample.r.fq)
 OutDir=genome_alignment/testm27/
+mkdir -p $OutDir
+ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+done
+```
+It worked so  I am going to repeat the same with more reads until see where the error occurs
+
+```bash
+Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
+for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_genetics/m27/conc); do
+Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
+echo $Cultivar
+ReadsF=$(ls $CultivarPath/m27_100K_sample.f.fq)
+ReadsR=$(ls $CultivarPath/m27_100K_sample.r.fq)
+OutDir=genome_alignment/test2m27/
 mkdir -p $OutDir
 ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
@@ -193,7 +208,7 @@ Try to change default settings
 samtools mpileup -d 8000 -r Chr11:32800005-40097135 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam|bcftools view|head -n 1000
 ```
 
-#Pileup chromosomes 5, 11 and 13 to call variants only is these regions
+# Pileup chromosomes 5, 11 and 13 to call variants only is these regions
 
 
 STEP1. mpileup is single threaded. Multiple instances can be launched to pileup different chromosome regions.
