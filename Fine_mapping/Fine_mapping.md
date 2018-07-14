@@ -1,4 +1,6 @@
-# Rootstocks alignment M9 MM106 M27
+#Fine mapping dwarfing regions associated with bark ratio
+
+## Rootstocks alignment M9 MM106 M27
 
 ### Fastaqc and trim  were done by Greg.
 
@@ -72,7 +74,7 @@ The files will be named e.g. /home/groups/harrisonlab/project_files/rootstock_ge
 The files are compressed so may need to gunzip them first before doing anything else with them.
 In each conc directory there are also a new stats directory which tells how much phix was found and removed
 
-# Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
+## Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
 
 ```bash
 Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
@@ -189,8 +191,23 @@ ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
+It worked as well so I am going to try to repeat the whole alignment and see what happens now.
 
-#Test pileup with 2 genomes only
+```bash
+Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
+for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_genetics/m27/conc); do
+Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
+echo $Cultivar
+ReadsF=$(ls $CultivarPath/m27_r1.fq.trim.f.filtered.fq)
+ReadsR=$(ls $CultivarPath/m27_r2.fq.trim.r.filtered.fq)
+OutDir=genome_alignment/m27/
+mkdir -p $OutDir
+ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+done
+```
+
+### Test pileup with 2 genomes only
 
 ```bash
 samtools mpileup -o test.out -r Chr11:32800005-40097135 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
@@ -208,7 +225,7 @@ Try to change default settings
 samtools mpileup -d 8000 -r Chr11:32800005-40097135 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam|bcftools view|head -n 1000
 ```
 
-# Pileup chromosomes 5, 11 and 13 to call variants only is these regions
+## Pileup chromosomes 5, 11 and 13 to call variants only is these regions
 
 
 STEP1. mpileup is single threaded. Multiple instances can be launched to pileup different chromosome regions.
