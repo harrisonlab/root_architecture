@@ -220,4 +220,19 @@ ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub -R y $ProgDir/sub_bwa2.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
-It didn't work, looks like a memory problem. I have increased the memory on the script and I am going to repeat it. Now using the script in my folder called sub_bwa2.sh with increased free memory (to 4G) and -R y to book the blacklaces 1 and 11
+It didn't work, looks like a memory problem. I have increased the memory on the script and I am going to repeat it. Now using the script in my folder called sub_bwa2.sh with increased free memory (to 4G) and -R y to book the blacklaces 11
+
+```bash
+Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
+for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_genetics/m27/conc); do
+Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
+echo $Cultivar
+ReadsF=$(ls $CultivarPath/m27_r1.fq.trim.f.filtered.fq)
+ReadsR=$(ls $CultivarPath/m27_r2.fq.trim.r.filtered.fq)
+OutDir=genome_alignment/m27alignment/
+mkdir -p $OutDir
+ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+qsub -R y $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+done
+```
+Looks like the alignment is working but not the sorting so I am going to split the job in two parts: first genome alignment (I have alterter the script just to do the alignment)
