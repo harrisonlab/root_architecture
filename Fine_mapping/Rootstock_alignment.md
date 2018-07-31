@@ -73,6 +73,21 @@ The files will be named e.g. /home/groups/harrisonlab/project_files/rootstock_ge
 The files are compressed so may need to gunzip them first before doing anything else with them.
 In each conc directory there are also a new stats directory which tells how much phix was found and removed
 
+### PhiX removal using bbduk
+
+```bash
+
+bbduk.sh \
+          in1=forward_read  \
+          in2=reverse_read \
+          out1=forward_out.gz \
+    out2=reverse_out.gz \
+    ref=phix_174.fa \
+    stats=stats.out \
+    k=31 \
+    hdist=1
+ ```
+
 ## Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
 
 ```bash
@@ -202,7 +217,7 @@ ReadsR=$(ls $CultivarPath/m27_r2.fq.trim.r.filtered.fq)
 OutDir=genome_alignment/m27/
 mkdir -p $OutDir
 ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
-qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+qsub -R y $ProgDir/sub_bwa2.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
-It didn't work, looks like a memory problem. I have increased the memory on the script and I am going to repeat it. Now using the script in my folder.
+It didn't work, looks like a memory problem. I have increased the memory on the script and I am going to repeat it. Now using the script in my folder called sub_bwa2.sh with increased free memory (to 4G) and -R y to book the blacklaces 1 and 11
