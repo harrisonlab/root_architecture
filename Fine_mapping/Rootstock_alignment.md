@@ -221,7 +221,7 @@ qsub -R y $ProgDir/sub_bwa2.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
 
-Looks like the alignment is working but not the sorting so I am going to split the job in two parts: first genome alignment (I have alterter the script just to do the alignment)
+Looks like the alignment is working but not the sorting so I am going to split the job in two parts: first genome alignment (I have alterted the script just to do the alignment)
 
 ```bash
 Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
