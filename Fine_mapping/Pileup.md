@@ -17,6 +17,18 @@ Try to change default settings
 ```bash
 samtools mpileup -d 8000 -r Chr11:32800005-40097135 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam|bcftools view|head -n 1000
 ```
+### Test pile up with all genomes but M27
+
+samtools mpileup -o testalmostall5a.out -r Chr05:1-25000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+
+samtools mpileup -o testalmostall5b.out -r Chr05:25000001-47952471 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+
+now concatenate both files
+
+bcftools concat -f testalmostall5a testalmostall5b >almostall_piledup.bcf
+
 
 ## Pileup chromosomes 5, 11 and 13 to call variants only is these regions
 
