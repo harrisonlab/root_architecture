@@ -260,9 +260,30 @@ OutDir=/home/groups/harrisonlab/project_files/root_architecture
 mkdir -p $OutDir/split_reads/F
 split -l 40000000 m27_r1.fq.trim.f.filtered.fq $OutDir/split_reads/F/m27_F_trim_split
 
+OutDir=/home/groups/harrisonlab/project_files/root_architecture
+mkdir -p $OutDir/split_reads/R
+split -l 40000000 m27_r2.fq.trim.r.filtered.fq $OutDir/split_reads/R/m27_R_trim_split
+
+
 cd $OutDir
 for File in $(ls split_reads/F/*); do
   NewName="${File}".fq
   mv $File $NewName
+done
+```
+Then do the alignment of each batch of data
+
+```bash
+Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
+for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/root_architecture/split_reads); do
+#Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
+Cultivar=m27a
+echo $Cultivar
+ReadsF=$(ls $CultivarPath/F/m27_F_trim_splitaa.fq)
+ReadsR=$(ls $CultivarPath/R/m27_R_trim_splitaa.fq)
+OutDir=genome_alignment/m27split/
+mkdir -p $OutDir
+ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
