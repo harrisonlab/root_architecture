@@ -1,4 +1,5 @@
 
+
 # Rootstocks alignment M9 MM106 M27
 
 ### Fastaqc and trim  were done by Greg.
@@ -248,5 +249,19 @@ OutDir=genome_alignment/m27justalignment/
 mkdir -p $OutDir
 ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub -R y $ProgDir/sub_bwa2.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+done
+```
+
+This is to split the reads file into smaller files in order to do severals jobs and then merge then
+
+```bash
+OutDir=/home/groups/harrisonlab/project_files/root_architecture
+mkdir -p $OutDir/split_reads/F
+split -l 40000000 m27_r1.fq.trim.f.filtered.fq $OutDir/split_reads/F/m27_F_trim_split
+
+cd $OutDir
+for File in $(ls split_reads/F/*); do
+  NewName="${File}".fq
+  mv $File $NewName
 done
 ```

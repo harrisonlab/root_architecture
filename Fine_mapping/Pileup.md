@@ -40,13 +40,3 @@ samtools mpileup -o test3_5a.bcf -r Chr05:1-1000000 -uf /home/groups/harrisonlab
 
 bcftools call -Ov -v -m test3_5a.bcf > test3a_5a.vcf
 cat test3a_5a.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_test3_5a.vcf
-
-### Split bam files by chromosomes and index them
-
-samtools view m9_sorted.bam Chr05 -b > m9chr5sorted.bam
-
-samtools view mm106_sorted.bam Chr05 -b > mm106chr5sorted.bam
-
-samtools view m116_sorted.bam Chr05 -b > m116chr5sorted.bam
-
-samtools index m*chr5sorted.bam
