@@ -264,13 +264,19 @@ OutDir=/home/groups/harrisonlab/project_files/root_architecture
 mkdir -p $OutDir/split_reads/R
 split -l 40000000 m27_r2.fq.trim.r.filtered.fq $OutDir/split_reads/R/m27_R_trim_split
 
+cd $OutDir
+for File in $(ls -d split_reads/F/*); do
+  NewName="${File}".fq
+  mv $File $NewName
+done
 
 cd $OutDir
-for File in $(ls split_reads/F/*); do
+for File in $(ls -d split_reads/R/*); do
   NewName="${File}".fq
   mv $File $NewName
 done
 ```
+
 Then do the alignment of each batch of data
 
 ```bash
