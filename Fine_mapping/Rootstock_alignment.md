@@ -253,6 +253,7 @@ done
 ```
 
 This is to split the reads file into smaller files in order to do severals jobs and then merge then
+This is splitting the file in 40millions reads files and then there is a loop to rename the files
 
 ```bash
 OutDir=/home/groups/harrisonlab/project_files/root_architecture
