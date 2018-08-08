@@ -74,20 +74,6 @@ The files will be named e.g. /home/groups/harrisonlab/project_files/rootstock_ge
 The files are compressed so may need to gunzip them first before doing anything else with them.
 In each conc directory there are also a new stats directory which tells how much phix was found and removed
 
-### PhiX removal using bbduk
-
-```bash
-
-bbduk.sh \
-          in1=forward_read  \
-          in2=reverse_read \
-          out1=forward_out.gz \
-    out2=reverse_out.gz \
-    ref=phix_174.fa \
-    stats=stats.out \
-    k=31 \
-    hdist=1
- ```
 
 ## Run BWA-mem to do the alignment of each rootstock genome with the new version of the Golden Delicious genome, version 3
 
@@ -251,7 +237,6 @@ ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub -R y $ProgDir/sub_bwa2.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
-
 This is to split the reads file into smaller files in order to do severals jobs and then merge then
 This is splitting the file in 40millions reads files and then there is a loop to rename the files
 
@@ -308,4 +293,8 @@ ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
-22 alignment in total have been done
+22 alignment have been done in total, then all the files will be merged using samtools merge
+
+samtools merge out.bam in1.bam in2.bam in3.bam
+
+samtools merge m27merged_sorted.bam m27a_sorted.bam m27b_sorted.bam m27c_sorted.bam m27d_sorted.bam m27e_sorted.bam m27f_sorted.bam m27g_sorted.bam m27h_sorted.bam m27i_sorted.bam m27j_sorted.bam m27k_sorted.bam m27l_sorted.bam m27m_sorted.bam m27n_sorted.bam m27o_sorted.bam m27p_sorted.bam m27q_sorted.bam m27r_sorted.bam m27s_sorted.bam m27t_sorted.bam m27u_sorted.bam m27v_sorted.bam
