@@ -293,3 +293,17 @@ ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
+```bash
+Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
+for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/root_architecture/split_reads); do
+#Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
+Cultivar=m27g
+echo $Cultivar
+ReadsF=$(ls $CultivarPath/F/m27_F_trim_splitag.fq)
+ReadsR=$(ls $CultivarPath/R/m27_R_trim_splitag.fq)
+OutDir=genome_alignment/m27split/
+mkdir -p $OutDir
+ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+done
+```
