@@ -298,10 +298,10 @@ done
 Reference=$(ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
 for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/root_architecture/split_reads); do
 #Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
-Cultivar=m27l
+Cultivar=m27q
 echo $Cultivar
-ReadsF=$(ls $CultivarPath/F/m27_F_trim_splital.fq)
-ReadsR=$(ls $CultivarPath/R/m27_R_trim_splital.fq)
+ReadsF=$(ls $CultivarPath/F/m27_F_trim_splitaq.fq)
+ReadsR=$(ls $CultivarPath/R/m27_R_trim_splitaq.fq)
 OutDir=genome_alignment/m27split/
 mkdir -p $OutDir
 ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
