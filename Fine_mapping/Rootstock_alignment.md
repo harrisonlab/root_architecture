@@ -298,3 +298,7 @@ done
 samtools merge out.bam in1.bam in2.bam in3.bam
 
 samtools merge m27merged_sorted.bam m27a_sorted.bam m27b_sorted.bam m27c_sorted.bam m27d_sorted.bam m27e_sorted.bam m27f_sorted.bam m27g_sorted.bam m27h_sorted.bam m27i_sorted.bam m27j_sorted.bam m27k_sorted.bam m27l_sorted.bam m27m_sorted.bam m27n_sorted.bam m27o_sorted.bam m27p_sorted.bam m27q_sorted.bam m27r_sorted.bam m27s_sorted.bam m27t_sorted.bam m27u_sorted.bam m27v_sorted.bam
+
+Then the sorted file has to be indexed using
+
+samtools index -b m27merged_sorted.bam m27merged_sorted.bai
