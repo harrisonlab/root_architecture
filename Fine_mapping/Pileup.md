@@ -77,4 +77,14 @@ samtools mpileup -o allpiledup_5f.bcf -r Chr05:45000001-47952461 -uf
 
 bcftools call -Ov -v -m allpiledup_5a.bcf > allpiledup_5a.vcf
 
+bcftools call -Ov -v -m allpiledup_5e.bcf > allpiledup_5e.vcf
+
+bcftools call -Ov -v -m allpiledup_5f.bcf > allpiledup_5f.vcf
+
+note: bcftools has to be installed in the working directory to make it works
+
 cat allpiledup_5a.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_alpiledup_5a.vcf
+
+cat allpiledup_5e.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_alpiledup_5e.vcf
+
+cat allpiledup_5f.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_alpiledup_5f.vcf
