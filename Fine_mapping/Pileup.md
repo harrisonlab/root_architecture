@@ -51,13 +51,33 @@ cat test3_5a.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_test3_5a
 
 ### All rootstocks piledup - small regions of each chromosome are piled up and variant calling has been done in each region and then regions can be merged in order to have the whole chromosome
 
-samtools mpileup -o allpiledup_5a.bcf -r Chr05:20000000-25000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+samtools mpileup -o allpiledup_5a.bcf -r Chr05:1-10000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27split/m27merged_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
 
+samtools mpileup -o allpiledup_5b.bcf -r Chr05:10000001-20000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27split/m27merged_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+
+samtools mpileup -o allpiledup_5c.bcf -r Chr05:20000001-30000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27split/m27merged_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+
+samtools mpileup -o allpiledup_5d.bcf -r Chr05:30000001-40000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27split/m27merged_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
 
 samtools mpileup -o allpiledup_5e.bcf -r Chr05:40000001-45000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27split/m27merged_sorted.bam
