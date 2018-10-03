@@ -14,9 +14,9 @@ cat 863_LIB6292_LDI5172_GTGAAA_L002_R2.fastq 863_LIB6292_LDI5172_GTGAAA_L003_R2.
 Data quality was visualised using fastqc:
 
 ```bash
-for RawData in $(ls raw_seq/m27/*.fa); do
+for RawData in $(ls raw_seq/m27/m27_read1.fa); do
 echo $RawData;
-ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/dna_qc;
+ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/dna_qc
 qsub $ProgDir/run_fastqc.sh $RawData;
 done
 ```
