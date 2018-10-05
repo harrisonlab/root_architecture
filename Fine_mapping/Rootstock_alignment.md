@@ -118,6 +118,7 @@ ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
+Repeated in Oct 2018
 
 ```bash
 Reference=$(ls /ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
@@ -125,12 +126,13 @@ for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_gen
 Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
 echo $Cultivar
 ReadsF=$(ls $CultivarPath/m13_r1.fq.trim.filtered.fq)
-ReadsR=$(ls $CultivarPath/m13_r1.fq.trim.filtered.fq)
+ReadsR=$(ls $CultivarPath/m13_r2.fq.trim.filtered.fq)
 OutDir=genome_alignment/m13/
 ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
 done
 ```
+Repeated in Oct 2018
 
 ```bash
 Reference=$(ls /ls /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta)
@@ -138,7 +140,7 @@ for CultivarPath in $(ls -d /home/groups/harrisonlab/project_files/rootstock_gen
 Cultivar=$(echo $CultivarPath | rev | cut -f2 -d '/' | rev)
 echo $Cultivar
 ReadsF=$(ls $CultivarPath/gala_r1.fq.trim.filtered.fq)
-ReadsR=$(ls $CultivarPath/gala_r1.fq.trim.filtered.fq)
+ReadsR=$(ls $CultivarPath/gala_r2.fq.trim.filtered.fq)
 OutDir=genome_alignment/m13/
 ProgDir=/home/armita/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
 qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
