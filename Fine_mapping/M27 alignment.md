@@ -14,7 +14,14 @@ cat 863_LIB6292_LDI5172_GTGAAA_L002_R2.fastq 863_LIB6292_LDI5172_GTGAAA_L003_R2.
 Data quality was visualised using fastqc:
 
 ```bash
-for RawData in $(ls raw_seq/m27/m27_read1.fq); do
+for RawData in $(ls m27_read1.fq); do
+echo $RawData;
+ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/dna_qc
+qsub $ProgDir/run_fastqc.sh $RawData;
+done
+```
+```bash
+for RawData in $(ls m27_read2.fq); do
 echo $RawData;
 ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/dna_qc
 qsub $ProgDir/run_fastqc.sh $RawData;
@@ -25,8 +32,8 @@ Trimming was performed on data to trim adapters from sequences and remove poor q
 This was done with fastq-mcf
 
 ```bash
-  Read_F=raw_seq/m27/m27_read1.fa
-  Read_R=raw_seq/m27/m27_read2.fa
+  Read_F=raw_seq/m27/m27_read1.fq
+  Read_R=raw_seq/m27/m27_read2.fq
   IluminaAdapters=/home/magdac/git_repos/emr_repos/tools/seq_tools/illumina_full_adapters.fa
   ProgDir=/home/magdac/git_repos/emr_repos/tools/seq_tools/rna_qc
   qsub $ProgDir/rna_qc_fastq-mcf.sh $Read_F $Read_R $IluminaAdapters DNA
@@ -75,3 +82,4 @@ for d in [mg]*;
 
  ./bowtie_se.sh $ROOTSTOCK/rootstock_genetics/o3/conc/o3_r1.fq.trim /home/groups/harrisonlab/ref_genomes/phix/phix $ROOTSTOCK/rootstock_genetics/o3/conc/ phix_filtered
  ```
+### It did not work so I will try to run every step separated
