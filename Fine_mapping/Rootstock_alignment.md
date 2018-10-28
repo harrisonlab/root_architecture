@@ -1,6 +1,6 @@
 
 
-# Rootstocks alignment M9 MM106 M27
+# Rootstocks alignment
 
 ### Fastaqc and trim  were done by Greg.
 
@@ -304,6 +304,8 @@ Then the sorted file has to be indexed using
 
 samtools index -b m27merged_sorted.bam m27merged_sorted.bai
 
+It didn't work properly
+
 ### Change the header in order to have only one file and index again
 
 samtools view -H m27merged_sorted.bam > header.sam
@@ -311,3 +313,190 @@ sed "s/SM\:m27[a-v]/m27/" header.sam > new_header.sam
 samtools reheader new_header.sam m27merged_sorted.bam
 
 samtools index -b m27merged_sorted.bam m27merged_sorted.bai
+
+# All alignments were done again without qsub (AGomez) M27 works
+
+This work was performed in the directory: /home/groups/harrisonlab/project_files/root_architecture
+
+Raw reads were trimmed and phiX filtered (done by Greg)
+
+## Data organisation
+
+Data was compressed and copied from the rootstock_genetics folder to a local directory genome aligment using bwa.
+
+```bash
+gzip -c ../rootstock_genetics/m27/conc/m27_r1.fq.trim.f.filtered.fq > m27_r1.fq.trim.f.filtered.fq.gz
+gzip -c ../rootstock_genetics/m27/conc/m27_r2.fq.trim.r.filtered.fq > m27_r2.fq.trim.r.filtered.fq.gz
+gzip -c ../rootstock_genetics/gala/conc/gala_r1.fq.trim.filtered.fq > gala_r1.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/gala/conc/gala_r2.fq.trim.filtered.fq > gala_r2.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/m13/conc/m13_r1.fq.trim.filtered.fq > m13_r1.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/m13/conc/m13_r2.fq.trim.filtered.fq > m13_r2.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/mm106/conc/mm106_r1.fq.trim.filtered.fq > mm106_r1.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/mm106/conc/mm106_r2.fq.trim.filtered.fq > mm106_r2.fq.trim.filtered.fq.gz
+gzip -c ../rootstock_genetics/m9/conc/m9_r1.fq.trim.f.filtered.fq > m9_r1.fq.trim.f.filtered.fq.gz
+gzip -c ../rootstock_genetics/m9/conc/m9_r2.fq.trim.r.filtered.fq > m9_r2.fq.trim.r.filtered.fq.gz
+gzip -c ../rootstock_genetics/m116/conc/phix_filtered.1 > m116_r1.fq.trim.f.filtered.fq.gz
+gzip -c ../rootstock_genetics/m116/conc/phix_filtered.2 > m116_r2.fq.trim.r.filtered.fq.gz
+
+mv m27_r1.fq.trim.f.filtered.fq.gz MC/genome_alignment/bwa/m27
+mv m27_r2.fq.trim.r.filtered.fq.gz MC/genome_alignment/bwa/m27
+mv gala_r1.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/gala
+mv gala_r2.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/gala
+mv m13_r1.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/m13
+mv m13_r2.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/m13
+mv mm106_r1.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/mm106
+mv mm106_r2.fq.trim.filtered.fq.gz MC/genome_alignment/bwa/mm106
+mv m9_r1.fq.trim.f.filtered.fq.gz MC/genome_alignment/bwa/m9
+mv m9_r2.fq.trim.r.filtered.fq.gz MC/genome_alignment/bwa/m9
+mv m116_r1.fq.trim.f.filtered.fq.gz MC/genome_alignment/bwa/m116
+mv m116_r2.fq.trim.r.filtered.fq.gz MC/genome_alignment/bwa/m116
+```
+
+## Genome alignment
+
+For some reason qsub bwa failed sorting the aligments, possibly due a lack of memory caused by the big file sizes.  
+
+```bash
+#Reference=apple_genome/GDDH13_1-1_formatted.fasta
+#ReadsF=m27_r1.fq.trim.f.filtered.fq.gz
+#ReadsR=m27_r2.fq.trim.r.filtered.fq.gz
+#OutDir=Magda/genome_alignment/m27
+#mkdir -p $OutDir
+#ProgDir=/home/gomeza/git_repos/emr_repos/tools/seq_tools/genome_alignment/bwa
+#qsub $ProgDir/sub_bwa.sh $Cultivar $Reference $ReadsF $ReadsR $OutDir
+```
+
+These aligments requires a lot of memory. Ideally they should run in blacklace11.
+This is not always possible, so I would recommend qlogin in a worker node (1,6-9) using the maximum number of threads allowed.
+
+```bash
+screen -a
+qlogin -pe smp 24 -l virtual_free=1G
+
+### M27 (Run each step command separated)
+#1st
+Prefix=m27
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=m27_r1.fq.trim.f.filtered.fq.gz
+R_reads=m27_r2.fq.trim.r.filtered.fq.gz
+OutDir=genome_alignment/bwa/m27
+bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
+
+```bash
+###  GALA (Run each step command separate)
+#1st
+Prefix=gala
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=MC/genome_alignment/bwa/gala/gala_r1.fq.trim.filtered.fq.gz
+R_reads=MC/genome_alignment/bwa/gala/gala_r2.fq.trim.filtered.fq.gz
+OutDir=genome_alignment/bwa/gala
+#bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
+
+```bash
+### M13 (Run each step command separate)
+#1st
+Prefix=m13
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=MC/genome_alignment/bwa/m13/m13_r1.fq.trim.filtered.fq.gz
+R_reads=MC/genome_alignment/bwa/m13/m13_r2.fq.trim.filtered.fq.gz
+OutDir=genome_alignment/bwa/gala
+#bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
+
+```bash
+### MM106 (Run each step command separate)
+#1st
+Prefix=mm106
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=MC/genome_alignment/bwa/mm106/mm106_r1.fq.trim.filtered.fq.gz
+R_reads=MC/genome_alignment/bwa/mm106/mm106_r2.fq.trim.filtered.fq.gz
+#bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
+
+```bash
+### M9 (Run each step command separate)
+#1st
+Prefix=m9
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=MC/genome_alignment/bwa/m9/m9_r1.fq.trim.f.filtered.fq.gz
+R_reads=MC/genome_alignment/bwa/m9/m9_r2.fq.trim.r.filtered.fq.gz
+#bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
+
+```bash
+### M116 (Run each step command separate)
+#1st
+Prefix=m116
+Assembly=apple_genome/GDDH13_1-1_formatted.fasta
+F_reads=MC/genome_alignment/bwa/m116/m116_r1.fq.trim.f.filtered.fq.gz
+R_reads=MC/genome_alignment/bwa/m116/m116_r2.fq.trim.r.filtered.fq.gz
+#bwa index $Assembly
+#2nd
+bwa mem -M -t 12 $Assembly $F_reads $R_reads | samtools view -S -b - > "$Prefix".bam
+### Add group and sample name (Prefix)
+#3rd
+bamaddrg -b "$Prefix".bam -s $Prefix -r $Prefix > "$Prefix"_unsorted.bam
+### Sort the full BAM file.
+#4th
+samtools sort -@ 16  "$Prefix"_unsorted.bam -o "$Prefix"_sorted.bam
+### index
+#5th
+samtools index "$Prefix"_sorted.bam
+```
