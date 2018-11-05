@@ -94,17 +94,12 @@ Step 2-now concatenate the files per chromosome
 
 bcftools cat piledup_5a.bcf piledup_5b.bcf piledup_5c.bcf piledup_5d.bcf piledup_5e.bcf piledup_5f.bcf > chromosome5.bcf
 
-bcftools call -Ov -v -m piledup_5a.bcf > piledup_5a.vcf
+Step 3- variant calling
 
-bcftools call -Ov -v -m piledup_5a.bcf > piledup_5b.vcf
+note: bcftools new version installed in my folder, to use this updated version add the full path: /home/magdac/prog/bcftools-1.8/bcftools
 
-bcftools call -Ov -v -m piledup_5a.bcf > piledup_5c.vcf
+/home/magdac/prog/bcftools-1.8/bcftools call -Ov -v -m chromosome5.bcf > chromosome5.vcf
 
-bcftools call -Ov -v -m piledup_5a.bcf > piledup_5d.vcf
-
-bcftools call -Ov -v -m piledup_5e.bcf > piledup_5e.vcf
-
-bcftools call -Ov -v -m piledup_5f.bcf > piledup_5f.vcf
 
 Step 3-
 
