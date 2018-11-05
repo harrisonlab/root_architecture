@@ -9,7 +9,7 @@ samtools view m116_sorted.bam Chr05 -b > m116chr5sorted.bam
 
 samtools view m27merged_sorted.bam Chr05 -b > m27chr5sorted.bam
 
-samtools index m27chr5sorted.bam
+samtools index m2*chr5sorted.bam
 
 Now alignments are going to be split in smaller sections and indexed
 
@@ -21,7 +21,10 @@ samtools view m116_sorted.bam Chr05:40000000-47952461 -b > m116chr5sectionsorted
 
 samtools view m27merged_sorted.bam Chr05:40000000-47952461 -b > m27chr5sectionsorted.bam
 
-samtools index m116chr5sectionsorted.bam
+samtools index m*chr5sectionsorted.bam
+
+samtools view m9_sorted.bam Chr05:40000000-47952461 -b > m9chr5section2.bam
+
 
 
 ### Extract consensus sequence form alignment bam file

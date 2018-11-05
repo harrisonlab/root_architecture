@@ -9,6 +9,7 @@ cat 863_LIB6292_LDI5172_GTGAAA_L002_R1.fastq 863_LIB6292_LDI5172_GTGAAA_L003_R1.
 cat 863_LIB6292_LDI5172_GTGAAA_L002_R2.fastq 863_LIB6292_LDI5172_GTGAAA_L003_R2.fastq 863_LIB6292_LDI5172_GTGAAA_L004_R2.fastq 863_LIB6292_LDI5172_GTGAAA_L005_R2.fastq > m27_read2.fq
 
 
+
 ### Check the quality of the Reads and trim adaptors:
 
 Data quality was visualised using fastqc:

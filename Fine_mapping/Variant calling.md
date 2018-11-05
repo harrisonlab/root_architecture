@@ -7,6 +7,7 @@ Step 1-Pileup regions in chromosome 5
 
 samtools mpileup -o test2_5a.bcf -r Chr05:1-15000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
 
+
 samtools mpileup -o test2_5b.bcf -r Chr05:15000001-30000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
 
@@ -55,6 +56,7 @@ samtools mpileup -o piledup_5b.bcf -r Chr05:8000001-16000000 -uf /home/groups/ha
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
 ```
+
 ```bash
 samtools mpileup -o piledup_5c.bcf -r Chr05:16000001-24000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
@@ -90,11 +92,19 @@ samtools mpileup -o piledup_5f.bcf -r Chr05:40000001-47952461 -uf
 ```
 Step 2-now concatenate the files per chromosome
 
-bcftools call -Ov -v -m piledup_5a.bcf > allpiledup_5a.vcf
+bcftools cat piledup_5a.bcf piledup_5b.bcf piledup_5c.bcf piledup_5d.bcf piledup_5e.bcf piledup_5f.bcf > chromosome5.bcf
 
-bcftools call -Ov -v -m allpiledup_5e.bcf > allpiledup_5e.vcf
+bcftools call -Ov -v -m piledup_5a.bcf > piledup_5a.vcf
 
-bcftools call -Ov -v -m allpiledup_5f.bcf > allpiledup_5f.vcf
+bcftools call -Ov -v -m piledup_5a.bcf > piledup_5b.vcf
+
+bcftools call -Ov -v -m piledup_5a.bcf > piledup_5c.vcf
+
+bcftools call -Ov -v -m piledup_5a.bcf > piledup_5d.vcf
+
+bcftools call -Ov -v -m piledup_5e.bcf > piledup_5e.vcf
+
+bcftools call -Ov -v -m piledup_5f.bcf > piledup_5f.vcf
 
 Step 3-
 
