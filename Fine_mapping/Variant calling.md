@@ -91,6 +91,105 @@ samtools mpileup -o piledup_5f.bcf -r Chr05:40000001-47952461 -uf
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
 ```
+```bash
+samtools mpileup -o piledup_11a.bcf -r Chr11:1-8000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_11b.bcf -r Chr11:8000001-16000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_11c.bcf -r Chr11:16000001-24000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_11d.bcf -r Chr11:24000001-32000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_11e.bcf -r Chr11:32000001-40000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_11f.bcf -r Chr11:40000001-43059885 -uf
+/home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13a.bcf -r Chr13:1-8000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13b.bcf -r Chr13:8000001-16000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13c.bcf -r Chr13:16000001-24000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13d.bcf -r Chr13:24000001-32000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13e.bcf -r Chr13:32000001-40000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+```bash
+samtools mpileup -o piledup_13f.bcf -r Chr13:40000001-44339518 -uf
+/home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m27/m27_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
+/home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam
+```
+
 Step 2-now concatenate the files per chromosome
 
 note: bcftools new version installed in my folder, to use this updated version add the full path: /home/magdac/prog/bcftools-1.8/bcftools
