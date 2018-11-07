@@ -7,7 +7,6 @@ Step 1-Pileup regions in chromosome 5
 
 samtools mpileup -o test2_5a.bcf -r Chr05:1-15000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
 
-
 samtools mpileup -o test2_5b.bcf -r Chr05:15000001-30000000 -uf /home/groups/harrisonlab/project_files/root_architecture/Apple_genome/GDDH13_1-1_formatted.fasta /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m13/m13_sorted.bam
 /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/mm106/mm106_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m116/m116_sorted.bam /home/groups/harrisonlab/project_files/root_architecture/genome_alignment/m9/m9_sorted.bam
 
@@ -37,7 +36,7 @@ bcftools call -Ov -v -m test3_5a.bcf > test3_5a.vcf
 cat test3_5a.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_test3_5a.vcf
 
 
-### All rootstocks piledup - small regions of each chromosome are piled up and variant calling has been done in each region and then regions can be merged in order to have the whole chromosome
+## All rootstocks piledup - small regions of each chromosome are piled up and variant calling has been done in each region and then regions can be merged in order to have the whole chromosome
 
 Step 1- Pileup regions in chromosomes
 
