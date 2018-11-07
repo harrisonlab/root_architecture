@@ -19,6 +19,7 @@ Step 2-now concatenate both files
 bcftools concat test2_5a.bcf test2_5b.bcf test2_5b.bcf > test2allpiledup.bcf
 
 Step 3- Filter ouput for variants
+
 bcftools call -Ov -v -m test2allpiledup.bcf > test2allpiledup.vcf
 cat test2allpiledup.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_test2allpiledup.vcf
 
@@ -92,20 +93,15 @@ samtools mpileup -o piledup_5f.bcf -r Chr05:40000001-47952461 -uf
 ```
 Step 2-now concatenate the files per chromosome
 
-bcftools cat piledup_5a.bcf piledup_5b.bcf piledup_5c.bcf piledup_5d.bcf piledup_5e.bcf piledup_5f.bcf > chromosome5.bcf
+note: bcftools new version installed in my folder, to use this updated version add the full path: /home/magdac/prog/bcftools-1.8/bcftools
+
+/home/magdac/prog/bcftools-1.8/bcftools concat piledup_5a.bcf piledup_5b.bcf piledup_5c.bcf piledup_5d.bcf piledup_5e.bcf piledup_5f.bcf > chromosome5new.bcf
 
 Step 3- variant calling
 
-note: bcftools new version installed in my folder, to use this updated version add the full path: /home/magdac/prog/bcftools-1.8/bcftools
+/home/magdac/prog/bcftools-1.8/bcftools call -Ov -v -m chromosome5new.bcf > chromosome5new.vcf
 
-/home/magdac/prog/bcftools-1.8/bcftools call -Ov -v -m chromosome5.bcf > chromosome5.vcf
-
-
-Step 3-
-
-note: bcftools has to be installed in the working directory to make it works
-
-cat allpiledup_5a.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_alpiledup_5a.vcf
+cat chromosome5new.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_chromosome5.vcf
 
 cat allpiledup_5e.vcf|/home/deakig/usr/bin/vcfutils.pl varFilter -d100 > flt_alpiledup_5e.vcf
 
