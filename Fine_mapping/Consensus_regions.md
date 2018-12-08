@@ -48,6 +48,14 @@ samtools view m116_sorted.bam Chr13:2000000-3000000 -b > m116chr13sectionsorted.
 
 samtools view m27_sorted.bam Chr13:2000000-3000000 -b > m27chr13sectionsorted.bam
 
+### Different section in Chr13 - Section b
+
+samtools view m9_sorted.bam Chr13:0-3000000 -b > m9chr13sectionBsorted.bam
+
+samtools view m116_sorted.bam Chr13:0-3000000 -b > m116chr13sectionBsorted.bam
+
+samtools view m27_sorted.bam Chr13:0-3000000 -b > m27chr13sectionBsorted.bam
+
 samtools index m116chr11sectionsorted.bam
 
 
