@@ -12,7 +12,7 @@ samtools view m27_sorted.bam Chr05 -b > m27chr5sorted.bam
 samtools index m116chr5sorted.bam
 
 
-### Now alignments are going to be divided in smaller sections and indexed
+### Alignment divided in smaller sections and indexed
 
 samtools view m9_sorted.bam Chr05:40000000-47952461 -b > m9chr5sectionsorted.bam
 
@@ -30,13 +30,23 @@ samtools view m9_sorted.bam Chr05:40000000-47952461 -b > m9chr5section2.bam
 ### Extract sections from the genome alignment in Chr11
 
 
-samtools view m9_sorted.bam Chr11:7000000-9000000 -b > m9chr11sectionsorted.bam
+samtools view m9_sorted.bam Chr11:6000000-11000000 -b > m9chr11sectionsorted.bam
 
-samtools view mm106_sorted.bam Chr11:7000000-9000000 -b > mm106chr11sectionsorted.bam
+samtools view m116_sorted.bam Chr11:6000000-11000000 -b > m116chr11sectionsorted.bam
 
-samtools view m116_sorted.bam Chr11:7000000-9000000 -b > m116chr11sectionsorted.bam
+samtools view m27_sorted.bam Chr11:6000000-11000000 -b > m27chr11sectionsorted.bam
 
-samtools view m27merged_sorted.bam Chr11:7000000-9000000 -b > m27chr11sectionsorted.bam
+samtools index m116chr11sectionsorted.bam
+
+
+### Extract sections from the genome alignment in Chr13
+
+
+samtools view m9_sorted.bam Chr13:2000000-3000000 -b > m9chr13sectionsorted.bam
+
+samtools view m116_sorted.bam Chr13:2000000-3000000 -b > m116chr13sectionsorted.bam
+
+samtools view m27_sorted.bam Chr13:2000000-3000000 -b > m27chr13sectionsorted.bam
 
 samtools index m116chr11sectionsorted.bam
 
